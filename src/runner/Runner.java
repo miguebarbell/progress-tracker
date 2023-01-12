@@ -3,74 +3,60 @@ package runner;
 import java.util.Scanner;
 
 public class Runner {
-	
-	
+
 
 	public static void main(String[] args) {
-		// TODO Auto-generated method stub
+		// user already exists in database
+		// retrieve the user from database 
 		String s = "Name";
-		mainMenu(s);
-		
+		loggedMenu(s);
+
 
 	}
 
-	public static void mainMenu(String id) {
-		
+	public static void loggedMenu(String id) {
+
 		//initializing scanner
 		Scanner scan = new Scanner(System.in);
-		
-		
-		menu(id);
-		
-		int ans = 0;
 
-		boolean whileBool = true;
-		
-		while(whileBool == true) {
-			ans = scan.nextInt();
-			
-			if(ans == 1) {
-				//Add album
-				System.out.println("This will add an album");
-				
-			}
-			else if(ans == 2) {
-				//Update Progress
-				System.out.println("This will update the progress of an album");
+		int ans;
 
-			}
-			else if(ans == 3) {
-				//View Albums
-				System.out.println("This will display the albums and their progress");
-			
-			}
-			else if (ans == 4) {
-
-				System.out.println("Thanks for using our tracker, have a great day!\n");
-				
-				whileBool = false;
-				
-			}
-			else{
-				System.out.println("Invalid input, try again!\n");
-				scan.nextLine();
-				
-				
-			}
+		do {
 			menu(id);
-			
-		}
-		
-		scan.close();
-		
+			ans = scan.nextInt();
+			switch (ans) {
+				case 1:
+					//Add album
+					System.out.println("This will add an album");
+					break;
 
-		
-		
+				case 2:
+					//Update Progress
+					System.out.println("This will update the progress of an album");
+					break;
+
+				case 3:
+					//View Albums
+					System.out.println("This will display the albums and their progress");
+					break;
+
+				case 4:
+					System.out.println("Thanks for using our tracker, have a great day!\n");
+					break;
+
+				default:
+					System.out.println("Invalid input, try again!\n");
+					scan.nextLine();
+			}
+		}
+		while (ans != 4);
+		scan.close();
 	}
+
 	public static void menu(String id) {
-		
+
 		System.out.println("==============================================");
-		System.out.println("  Hello, " + id );
+		System.out.println("  Hello, " + id);
 		System.out.println("| Welcome to the Album Progress Tracker!     |");
 		System.out.println("|                                            |");
 		System.out.println("| Please choose from, the following options: |");
@@ -81,7 +67,7 @@ public class Runner {
 		System.out.println("| 4: LOGOUT                                  |");
 		System.out.println("|                                            |");
 		System.out.println("==============================================");
-		
-		
+
+
 	}
 }
