@@ -8,6 +8,8 @@ public class Runner {
 
 	public static void main(String[] args) {
 		// TODO Auto-generated method stub
+		// user already exists in database 
+		// retrieve the user from database 
 		String s = "Name";
 		mainMenu(s);
 		
