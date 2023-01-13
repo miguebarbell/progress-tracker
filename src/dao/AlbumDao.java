@@ -8,7 +8,7 @@ public interface AlbumDao {
 	
 	public List<Album> getAllAlbums();
 	
-	
+	public boolean addAlbum(Album album);
 	
 	
 /*public List<Employees> getAllEmployees();

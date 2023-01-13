@@ -64,7 +64,26 @@ public class AlbumDaoSql implements AlbumDao {
 		} catch (SQLException e) {
 			System.out.println("Could not retrieve list of albums");
 		}
-		return null;
+		return albList;
+	}
+
+	@Override
+	public boolean addAlbum(Album album) {
+		
+		try( PreparedStatement pstmt = conn.prepareStatement("INSERT into albums(album)values(?)")){
+			
+			pstmt.setString(1, album.getAlbum());
+			
+			int count = pstmt.executeUpdate();
+			
+			if(count > 0) {
+				return true;
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+			System.out.println("album add failed");
+		}
+		return false;
 	}
 
 }

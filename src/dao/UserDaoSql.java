@@ -70,6 +70,43 @@ public class UserDaoSql implements UserDao{
 		
 		return null;
 	}
+
+	@Override
+	public User loginUser(User user) {
+		
+    try( PreparedStatement pstmt = conn.prepareStatement("select * from users where username = ? and password = md5(?) ")){
+			
+    	   
+			pstmt.setString(1, user.getUsername());
+			pstmt.setString(2, user.getPassword());
+			
+			ResultSet rs = pstmt.executeQuery();
+			User user1 = null;
+			
+			if(rs.next()) {
+				int usId = rs.getInt("user_id");
+				String usname = rs.getString("username");
+				String password = rs.getString("password");
+				
+				user1 = new User(usId, usname, password);
+				
+			}
+			
+			rs.close();
+			if(user1 != null) {
+			System.out.println("Account found" + "\n" + "Welcome " + user.getUsername());
+			}
+			return user1;
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+			System.out.println("Could not find user's account, please register");
+		}
+		
+		return null;
+	}
+
+	
 	
 	
 

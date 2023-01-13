@@ -46,11 +46,12 @@ public class ProgressDaoSql implements ProgressDao {
 	@Override
 	public boolean updateProgress(Progress progress) {
 		
-		try ( PreparedStatement pstmt = conn.prepareStatement("update set progress = ? where ablum_id = ? and user_id = ?")) {
+		try ( PreparedStatement pstmt = conn.prepareStatement("update progress set user_id = ?, album_id = ?, progress = ? where album_id = ?")) {
 			
 			pstmt.setInt(1, progress.getUser_id());
 			pstmt.setInt(2, progress.getAlbum_id());
 			pstmt.setString(3, progress.getProgress());
+			pstmt.setInt(4, progress.getAlbum_id());
 			
 			int i = pstmt.executeUpdate();
 			
