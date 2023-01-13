@@ -9,6 +9,7 @@ import java.util.Scanner;
 import dao.UserDaoSql;
 import exceptions.LoginException;
 import exceptions.TrackingException;
+import populator.Populator;
 import dao.Album;
 import dao.AlbumDaoSql;
 import dao.Progress;
@@ -19,6 +20,8 @@ public class Runner {
 
 
 	public static void main(String[] args) {
+		Populator.reset();
+
 		// user already exists in database
 		// retrieve the user from database 
 		Scanner scan = new Scanner(System.in);
@@ -26,6 +29,7 @@ public class Runner {
 		UserDaoSql userCaller = new UserDaoSql();
 		
 		boolean isLogging = true;
+		
 		
 		do {
 			
@@ -95,6 +99,7 @@ public class Runner {
 			
 			ans = scan.nextInt();
 			
+			
 			List<Progress> progList = new ArrayList<Progress>();
 		    progList = progressCaller.getAllUserTrackers(user.getUser_id());
 			
@@ -103,7 +108,8 @@ public class Runner {
 					//Add album
 					//System.out.println("This will add an album");
 					System.out.println("What's the name of the new album?");
-					String albumName = scan.next();
+					String var = scan.next();
+					String albumName = var + scan.nextLine();
 					Album albumAdded = new Album(albumName);
 					boolean addResult = albumCaller.addAlbum(albumAdded);
 					if(addResult) {
