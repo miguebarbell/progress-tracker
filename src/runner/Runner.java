@@ -11,6 +11,7 @@ import com.mysql.cj.exceptions.StatementIsClosedException;
 import dao.UserDaoSql;
 import exceptions.LoginException;
 import exceptions.TrackingException;
+import populator.Populator;
 import dao.Album;
 import dao.AlbumDaoSql;
 import dao.Progress;
@@ -20,6 +21,9 @@ import dao.User;
 public class Runner {
 
 	public static void main(String[] args) {
+
+		Populator.reset();
+
 		Scanner scan = new Scanner(System.in);
 
 		UserDaoSql userCaller = new UserDaoSql();
