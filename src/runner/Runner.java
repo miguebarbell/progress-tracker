@@ -95,6 +95,9 @@ public class Runner {
 			
 			ans = scan.nextInt();
 			
+			List<Progress> progList = new ArrayList<Progress>();
+		    progList = progressCaller.getAllUserTrackers(user.getUser_id());
+			
 			switch (ans) {
 				case 1:
 					//Add album
@@ -116,6 +119,15 @@ public class Runner {
 					// Assumed that user already has an id 
 					int userId = user.getUser_id();
 					System.out.println("What's the album id?");
+					System.out.println("----------------------------------------------------------------------------");
+					
+					List<Album> albList = new ArrayList<Album>();
+				    albList = albumCaller.getAllAlbums();
+				    
+				    for (Album a : albList) {
+				    	System.out.println(a);
+				    }
+				    
 					int albumId = scan.nextInt();
 					
 					int choice;
@@ -185,6 +197,11 @@ public class Runner {
 					//System.out.println("This will update the progress of an album");
 					int userId2 = user.getUser_id();
 					System.out.println("What's the album id to update?");
+					System.out.println("----------------------------------------------------------------------------");
+				    
+				    for (Progress a : progList) {
+				    	System.out.println(a);
+				    }
 					int albumId2 = scan.nextInt();
 					
 					int choice2;
@@ -252,12 +269,13 @@ public class Runner {
 				case 4:
 					//View Albums and their trackers 
 					System.out.println("Your progress trackers and albums");
-				    List<Progress> progList = new ArrayList<Progress>();
-				    progList = progressCaller.getAllUserTrackers(user.getUser_id());
-				    List<Album> albList = new ArrayList<Album>();
-				    albList = albumCaller.getAllAlbums();
-				    System.out.println(albList);
-   			        System.out.println(progList);
+					System.out.println("----------------------------------------------------------------------------");
+				    
+				    for (Progress a : progList) {
+				    	System.out.println(a);
+				    }
+//				    System.out.println(albList);
+//   			        System.out.println(progList);
 					break;
 
 				case 5:
