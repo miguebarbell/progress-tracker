@@ -16,12 +16,10 @@ import dao.ProgressDaoSql;
 import dao.User;
 
 public class Runner {
-	
-	
+
 
 	public static void main(String[] args) {
-		// TODO Auto-generated method stub
-		// user already exists in database 
+		// user already exists in database
 		// retrieve the user from database 
 		Scanner scan = new Scanner(System.in);
 		
@@ -301,6 +299,7 @@ public class Runner {
 	}
 		
 	}
+  
 	public static void menu(User user) {
 		
 		System.out.println("==============================================");
@@ -316,8 +315,8 @@ public class Runner {
 		System.out.println("| 5: LOGOUT                                  |");
 		System.out.println("|                                            |");
 		System.out.println("==============================================");
-		
-		
+
+
 	}
 	
 }
