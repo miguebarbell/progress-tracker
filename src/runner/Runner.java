@@ -127,9 +127,13 @@ public class Runner {
 					List<Album> albList = new ArrayList<Album>();
 					albList = albumCaller.getAllAlbums();
 
-					for (Album a : albList) {
-						System.out.println(a);
-					}
+//					for (Album a : albList) {
+//						System.out.println(a);
+//					}
+					System.out.println("\nID - Artist, 'Album;");
+					albList.forEach(album -> {
+						System.out.printf("%s  - %s\n", album.getAlbum_id(), album.getAlbum());
+					});
 
 					int albumId = scan.nextInt();
 
