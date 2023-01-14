@@ -5,7 +5,7 @@ public class TrackingException extends Exception {
 	   System.out.println("Tracker not found");
    }
    
-   TrackingException(String message){
+   public TrackingException(String message){
 	   System.out.println(message);
    }
 }
