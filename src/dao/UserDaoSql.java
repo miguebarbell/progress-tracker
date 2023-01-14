@@ -6,6 +6,7 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 
 import connection.ConnectionManager;
+import encoder.HasherImpl;
 
 public class UserDaoSql implements UserDao{
 	
@@ -63,12 +64,29 @@ public class UserDaoSql implements UserDao{
 			rs.close();
 			// use getter for the username 
 			return user;
-			
+
 		} catch (SQLException e) {
 			System.out.println("Could not find user id" + u_id);
 		}
 		
 		return null;
+	}
+
+	@Override
+	public boolean createUser(String username, String password) {
+//		String hashedpassword = new HasherImpl().hasher(password);
+//		String query = "select * from users ORDER BY user_id DESC LIMIT 1;";
+		try {
+//			ResultSet resultSet = conn.createStatement().executeQuery(query);
+//			if (resultSet.next()) {
+//				int lastId = resultSet.getInt(1);
+				conn.createStatement().execute("INSERT into users(username, password) values ('" + username + "', md5('" + password +
+				                               "'))");
+//			}
+		} catch (SQLException e) {
+			return false;
+		}
+		return true;
 	}
 
 	@Override
