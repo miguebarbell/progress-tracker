@@ -1,6 +1,5 @@
 package runner;
 
-import java.util.ArrayList;
 import java.util.InputMismatchException;
 import java.util.List;
 import java.util.NoSuchElementException;
@@ -25,27 +24,36 @@ public class Runner {
 		Scanner scan = new Scanner(System.in);
 
 		UserDaoSql userCaller = new UserDaoSql();
+		String welcome = "\nWelcome to our tracking app.\n";
+		String banner = """
+				    
+				▀█▀ █▀█ ▄▀█ █▀▀ █▄▀ █▀▀ █▀█
+				  █  █▀▄ █▀█ █▄▄ █ █  ██▄ █▀▄
+							""";
+		String loginMenu = "1 or l for (L)ogin\n2 or r for (R)egister\n0 or q for (Q)uit\ndont be a quitter";
 
 		boolean isLogging = true;
 
 		do {
 
-			System.out.println("Welcome please select L for login or Q to quit");
-			String ans = scan.next().toUpperCase();
+//			System.out.println("Welcome please select L for login or Q to quit");
+			System.out.println(welcome + banner);
+			System.out.println(loginMenu);
+			String ans = scan.nextLine().toUpperCase();
+			if (ans.isEmpty()) {
+				break;
+			}
 
-			switch (ans) {
-				case "L":
+			switch (ans.charAt(0)) {
+				case 'L':
+				case '1':
 					System.out.println("What's your username?");
 					try {
-						String username = scan.next();
-
+						String username = scan.nextLine();
 						System.out.println("What's your password?");
-						String password = scan.next();
-
+						String password = scan.nextLine();
 						User loggedUser = new User(username, password);
-
 						User verifiedUser = userCaller.loginUser(loggedUser);
-
 						if (verifiedUser != null) {
 							// call menu function
 							System.out.println("You are logged in");
@@ -64,11 +72,27 @@ public class Runner {
 						System.out.println("login failed");
 					}
 					break;
+				case 'R':
+				case '2':
+					System.out.println("\nPlease try to use a unique username and a difficult password.\nWe store your password" +
+					                   "with MD5 message-digest algorithm, 128bit hash value.");
+					System.out.println("\nusername:");
+					String newUsername = scan.nextLine();
+					System.out.println("\npassword:");
+					String password = scan.nextLine();
+					boolean result = userCaller.createUser(newUsername, password);
+					if (result) {
+						System.out.println("\nUser " + newUsername + "created successfully.");
+					} else {
+						System.out.println("\nError, try again with other username.");
+					}
+					break;
 
-				case "Q":
+				case 'Q':
 					isLogging = false;
 					System.out.println("Thanks for using our progress tracking app. Have a great day!");
 					break;
+
 
 				default:
 					System.out.println("Input must be L for login or Q for quit");
@@ -283,8 +307,8 @@ public class Runner {
 						System.out.println("Invalid input, try again!\n");
 						scan.nextLine();
 				}
-
 			} while (ans != 5);
+			System.exit(0);
 		} catch (InputMismatchException e) {
 			System.out.println("Invalid input, must enter a number");
 		} catch (TrackingException e) {
