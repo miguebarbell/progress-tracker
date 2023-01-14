@@ -6,8 +6,6 @@ import java.util.List;
 import java.util.NoSuchElementException;
 import java.util.Scanner;
 
-import com.mysql.cj.exceptions.StatementIsClosedException;
-
 import dao.UserDaoSql;
 import exceptions.LoginException;
 import exceptions.TrackingException;
@@ -145,6 +143,7 @@ public class Runner {
 
 					choice = scan.nextInt();
 
+					String message = "Could not add progress tracker";
 					boolean stillChoosing = true;
 					while (stillChoosing) {
 						switch (choice) {
@@ -156,8 +155,8 @@ public class Runner {
 								System.out.println(progressAdded);
 								System.out.println("Progress tracker successfully added");
 							} else {
-								System.out.println("Could not add progress tracker");
-								throw new TrackingException();
+								System.out.println(message);
+								throw new TrackingException(message);
 							}
 							stillChoosing = false;
 							break;
@@ -169,8 +168,8 @@ public class Runner {
 								System.out.println(progressAdded2);
 								System.out.println("Progress tracker successfully added");
 							} else {
-								System.out.println("Could not add progress tracker");
-								throw new TrackingException();
+								System.out.println(message);
+								throw new TrackingException(message);
 							}
 							stillChoosing = false;
 							break;
@@ -182,8 +181,8 @@ public class Runner {
 								System.out.println(progressAdded3);
 								System.out.println("Progress tracker successfully added");
 							} else {
-								System.out.println("Could not add progress tracker");
-								throw new TrackingException();
+								System.out.println(message);
+								throw new TrackingException(message);
 							}
 							stillChoosing = false;
 							break;
@@ -238,7 +237,7 @@ public class Runner {
 								System.out.println("Could not update progress tracker");
 								throw new TrackingException();
 							}
-							stillChoosing2 = false;
+						stillChoosing2 = false;
 							break;
 						case 7:
 							progressChoice2 = progressStatus2[1];
@@ -344,6 +343,9 @@ public class Runner {
 	}
 
 	public static void viewAlbums(List<Progress> progList) {
+		if (progList.isEmpty()) {
+			System.out.println("\nYou arent tracking any albums.\n");
+		}
 		for (Progress a : progList) {
 			System.out.println(a);
 		}
