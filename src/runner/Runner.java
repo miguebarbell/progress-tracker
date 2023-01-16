@@ -362,8 +362,10 @@ public class Runner {
 			Album progressAlbum =
 					albums.stream().filter(album -> album.getAlbum_id() == progress.getAlbum_id())
 					      .findFirst().get();
-			System.out.printf("%s - %s -> %s", progressAlbum.getAlbum_id(), progressAlbum.getAlbum(),
-					progress.getProgress());
+			if (progressAlbum.getAlbum_id() < 10)	System.out.printf("\n %s - %s -> %s", progressAlbum.getAlbum_id(),
+					progressAlbum.getAlbum(), progress.getProgress());
+			else System.out.printf("\n%s - %s -> %s", progressAlbum.getAlbum_id(),
+					progressAlbum.getAlbum(), progress.getProgress());
 		});
 	}
 
