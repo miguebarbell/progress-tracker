@@ -53,7 +53,7 @@ public class Runner {
 				System.out.println("What's your username?");
 				try {
 					String username = scan.nextLine();
-					System.out.println("What's your password?");
+					System.out.println("\nWhat's your password?");
 					String password = scan.nextLine();
 					User loggedUser = new User(username, password);
 					User verifiedUser = userCaller.loginUser(loggedUser);
@@ -66,6 +66,7 @@ public class Runner {
 					} else {
 						// throw LoginException and catch it
 						throw new LoginException();
+
 					}
 				} catch (InputMismatchException e) {
 					e.printStackTrace();
@@ -153,8 +154,8 @@ public class Runner {
 					int choice;
 					String progressChoice;
 					String[] progressStatus = { "not completed", "in-progress", "completed", "" };
-					System.out.println("What's the status of the album?" + "\n" + "Please enter 6 for not started "
-							+ " 7 for in-progress or 8 for completed");
+
+					progressMenu();
 
 					choice = scan.nextInt();
 
@@ -215,30 +216,22 @@ public class Runner {
 
 				case 3:
 					// Update Progress
-					// System.out.println("This will update the progress of an album");
 					int userId2 = user.getUser_id();
 					System.out.println("What's the album id to update?");
 					System.out.println("----------------------------------------------------------------------------");
 
 					viewAlbums(progList);
 
-					List<Album> albums = albumCaller.getAllAlbums();
-					progList.forEach(progress -> {
-						Album progressAlbum = albums.stream()
-								.filter(album -> album.getAlbum_id() == progress.getAlbum_id()).findFirst().get();
-						System.out.printf("%s - %s -> %s", progressAlbum.getAlbum_id(), progressAlbum.getAlbum(),
-								progress.getProgress());
-					});
+					System.out.println("\n");
 
 					int albumId2 = scan.nextInt();
 
 					int choice2;
 					String progressChoice2;
 					String[] progressStatus2 = { "not completed", "in-progress", "completed", "" };
-					System.out.println("What status would like for the album update?" + "\n"
-							+ "Please enter 6 for not completed " + " 7 for in-progress or 8 for completed");
+					progressUpdateMenu();
+					
 
-					// Add album name
 
 					choice2 = scan.nextInt();
 
@@ -302,6 +295,8 @@ public class Runner {
 					System.out.println("----------------------------------------------------------------------------");
 
 					viewAlbums(progList);
+					
+					System.out.println("\n");
 
 					break;
 
@@ -340,6 +335,22 @@ public class Runner {
 		System.out.println("| 5: LOGOUT                                  |");
 		System.out.println("|                                            |");
 		System.out.println("==============================================");
+	}
+	public static void progressMenu() {
+
+		System.out.println("Please choose your progress:			  ");
+		System.out.println("                                          ");
+		System.out.println("6 - Not Started                           ");
+		System.out.println("7 - In Progress                           ");
+		System.out.println("8 - Completed                            \n");
+	}
+	public static void progressUpdateMenu() {
+
+		System.out.println("Please choose your updated progress:      ");
+		System.out.println("                                          ");
+		System.out.println("6 - Not Started                           ");
+		System.out.println("7 - In Progress                           ");
+		System.out.println("8 - Completed                            \n");
 	}
 
 	public static void addAlbum(Scanner scan, AlbumDaoSql albumCaller) {
