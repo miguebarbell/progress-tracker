@@ -28,7 +28,7 @@ public class Runner {
 		String banner = """
 
 				▀█▀ █▀█ ▄▀█ █▀▀ █▄▀ █▀▀ █▀█
-				  █  █▀▄ █▀█ █▄▄ █ █  ██▄ █▀▄
+	 	  █  █▀▄ █▀█ █▄▄ █ █ ██▄ █▀▄
 							""";
 		String loginMenu = "1 or l for (L)ogin\n2 or r for (R)egister\n0 or q for (Q)uit\ndont be a quitter";
 
@@ -80,7 +80,7 @@ public class Runner {
 			case 'R':
 			case '2':
 				System.out.println(
-						"\nPlease try to use a unique username and a difficult password.\n We store your password "
+						"\nPlease try to use a unique username and a difficult password.\nWe store your password "
 								+ "with MD5 message-digest algorithm, 128bit hash value.");
 				System.out.println("\nusername:");
 				String newUsername = scan.nextLine();
@@ -88,10 +88,12 @@ public class Runner {
 				String password = scan.nextLine();
 				boolean result = userCaller.createUser(newUsername, password);
 				if (result) {
-					System.out.println("\nUser " + newUsername + "created successfully.");
+					System.out.println("\nUser " + newUsername + " created successfully.");
 				} else {
 					System.out.println("\nError, try again with other username.");
 				}
+				System.out.println(welcome + banner);
+				System.out.println(loginMenu);
 				break;
 
 			case 'Q':
