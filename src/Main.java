@@ -1,6 +1,7 @@
 import exeptions.LoginException;
 import runner.Runner;
 
+
 public class Main {
 	public static void main(String[] args) {
 		try {
@@ -10,7 +11,6 @@ public class Main {
 			throw new LoginException();
 		} catch (LoginException e) {
 
-			// Launch again the login prompt.
 		}
 	}
 }

@@ -98,6 +98,7 @@ public class Runner {
 				break;
 
 			case 'Q':
+			case '0':
 				isLogging = false;
 				System.out.println("Thanks for using our progress tracking app. Have a great day!");
 
@@ -154,12 +155,14 @@ public class Runner {
 					int choice;
 					String progressChoice;
 					String[] progressStatus = { "not completed", "in-progress", "completed", "" };
+					
+					
 
 					progressMenu();
 
 					choice = scan.nextInt();
 
-					String message = "Could not add progress tracker";
+					String message = "Invalid progress entered";
 					boolean stillChoosing = true;
 					while (stillChoosing) {
 						switch (choice) {
@@ -204,11 +207,11 @@ public class Runner {
 							break;
 
 						default:
-							System.out.println("Incorrect input");
-							System.out.println("What's the status of the album?" + "\n"
-									+ "Please enter 6 for not completed " + " 7 for in-progress or 8 for completed");
+
 							stillChoosing = false;
-							break;
+							throw new TrackingException(message);
+
+							//break;
 						}
 					}
 
@@ -313,7 +316,7 @@ public class Runner {
 		} catch (InputMismatchException e) {
 			System.out.println("Invalid input, must enter a number");
 		} catch (TrackingException e) {
-			System.out.println("Could not find progress tracker, please try again");
+			
 		} catch (NoSuchElementException e) {
 			System.out.println("Input was not recognized");
 		}

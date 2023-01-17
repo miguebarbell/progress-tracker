@@ -68,12 +68,25 @@ public class ProgressDaoSql implements ProgressDao {
 	public boolean addProgress(Progress progress) {
 		
 		try( PreparedStatement pstmt = conn.prepareStatement("insert into progress(user_id, album_id, progress)values(?,?,?)")){
-		   
+		//try( Statement statement = conn.createStatement()){
+			
+//			int ui = progress.getUser_id();
+//			int ai = progress.getAlbum_id();
+//			String pi = progress.getProgress();
+			//boolean b = statement.execute("insert into progress(user_id, album_id, progress)values(" + ui +"," + ai + "," + pi + ")");
+			
+//			
 			pstmt.setInt(1, progress.getUser_id());
 			pstmt.setInt(2, progress.getAlbum_id());
 			pstmt.setString(3, progress.getProgress());
 			
 			int count = pstmt.executeUpdate();
+			
+			//int count = statement.executeQuery();
+
+//			if(b) {
+//				return true;
+//			}
 			
 			if(count > 0) {
 				return true;

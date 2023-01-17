@@ -74,15 +74,11 @@ public class UserDaoSql implements UserDao{
 
 	@Override
 	public boolean createUser(String username, String password) {
-//		String hashedpassword = new HasherImpl().hasher(password);
-//		String query = "select * from users ORDER BY user_id DESC LIMIT 1;";
+
 		try {
-//			ResultSet resultSet = conn.createStatement().executeQuery(query);
-//			if (resultSet.next()) {
-//				int lastId = resultSet.getInt(1);
+
 				conn.createStatement().execute("INSERT into users(username, password) values ('" + username + "', md5('" + password +
 				                               "'))");
-//			}
 		} catch (SQLException e) {
 			return false;
 		}
